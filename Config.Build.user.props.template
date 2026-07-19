@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copy this file to Config.Build.user.props and adjust paths for your machine.
+  Config.Build.user.props is gitignored — do not commit machine-specific paths.
+
+  VALHEIM_INSTALL  = Steam Valheim folder (contains valheim.exe)
+  BEPINEX_ROOT     = Folder with BepInEx\ (often your Thunderstore Mod Manager profile)
+  MOD_DEPLOYPATH   = Where the built DLL is copied after build
+-->
+<Project>
+  <PropertyGroup>
+    <VALHEIM_INSTALL>C:\Program Files (x86)\Steam\steamapps\common\Valheim</VALHEIM_INSTALL>
+    <!-- $(USERPROFILE) expands to your Windows user folder — no hard-coded account name -->
+    <BEPINEX_ROOT>$(USERPROFILE)\AppData\Roaming\Thunderstore Mod Manager\DataFolder\Valheim\profiles\Default</BEPINEX_ROOT>
+    <MOD_DEPLOYPATH>$(BEPINEX_ROOT)\BepInEx\plugins\RunningMan</MOD_DEPLOYPATH>
+  </PropertyGroup>
+</Project>

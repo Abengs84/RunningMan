@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <Import Project="$(MSBuildThisFileDirectory)Config.Build.user.props" Condition="Exists('$(MSBuildThisFileDirectory)Config.Build.user.props')" />
+
+  <PropertyGroup>
+    <!-- Steam Valheim game folder (game assemblies live here) -->
+    <VALHEIM_INSTALL Condition="'$(VALHEIM_INSTALL)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Valheim</VALHEIM_INSTALL>
+    <VALHEIM_MANAGED>$(VALHEIM_INSTALL)\valheim_Data\Managed</VALHEIM_MANAGED>
+
+    <!--
+      BepInEx/Harmony location. If you use Thunderstore Mod Manager, point this at your profile folder
+      (the folder that contains BepInEx\ and winhttp.dll), NOT the Steam game folder.
+    -->
+    <BEPINEX_ROOT Condition="'$(BEPINEX_ROOT)' == ''">$(VALHEIM_INSTALL)</BEPINEX_ROOT>
+    <BEPINEX_CORE>$(BEPINEX_ROOT)\BepInEx\core</BEPINEX_CORE>
+
+    <!-- Prefer unstripped Unity DLLs from BepInExPack; fall back to game Managed folder -->
+    <UNITY_MANAGED Condition="Exists('$(VALHEIM_INSTALL)\unstripped_corlib\UnityEngine.dll')">$(VALHEIM_INSTALL)\unstripped_corlib</UNITY_MANAGED>
+    <UNITY_MANAGED Condition="'$(UNITY_MANAGED)' == ''">$(VALHEIM_MANAGED)</UNITY_MANAGED>
+
+    <!-- Publicized Valheim assembly is required for this mod to compile -->
+    <VALHEIM_ASSEMBLY>$(VALHEIM_MANAGED)\publicized_assemblies\assembly_valheim_publicized.dll</VALHEIM_ASSEMBLY>
+
+    <MOD_DEPLOYPATH Condition="'$(MOD_DEPLOYPATH)' == ''">$(BEPINEX_ROOT)\BepInEx\plugins\RunningMan</MOD_DEPLOYPATH>
+  </PropertyGroup>
+
+  <Target Name="VerifyValheimReferences" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="!Exists('$(BEPINEX_CORE)\BepInEx.dll')"
+           Text="Missing BepInEx.dll at $(BEPINEX_CORE). Set BEPINEX_ROOT in Config.Build.user.props to your Thunderstore profile folder (contains BepInEx\)." />
+    <Error Condition="!Exists('$(BEPINEX_CORE)\0Harmony.dll')"
+           Text="Missing 0Harmony.dll at $(BEPINEX_CORE)." />
+    <Error Condition="!Exists('$(VALHEIM_ASSEMBLY)')"
+           Text="Missing $(VALHEIM_ASSEMBLY). Publicize assembly_valheim.dll: drag valheim_Data\Managed\assembly_valheim.dll onto AssemblyPublicizer.exe. Do NOT publicize assembly_utils.dll." />
+    <Error Condition="!Exists('$(UNITY_MANAGED)\UnityEngine.CoreModule.dll')"
+           Text="Missing UnityEngine.CoreModule.dll at $(UNITY_MANAGED)." />
+  </Target>
+</Project>

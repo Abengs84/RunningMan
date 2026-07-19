@@ -1,0 +1,92 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>RunningMan</AssemblyName>
+    <RootNamespace>RunningMan</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>RunningMan</Authors>
+    <Description>Marathon race tracker for Valheim dedicated servers</Description>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>$(BEPINEX_CORE)\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="assembly_utils">
+      <HintPath>$(VALHEIM_MANAGED)\assembly_utils.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="assembly_valheim">
+      <HintPath>$(VALHEIM_ASSEMBLY)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>$(BEPINEX_CORE)\BepInEx.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(UNITY_MANAGED)\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(UNITY_MANAGED)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>$(UNITY_MANAGED)\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(UNITY_MANAGED)\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>$(UNITY_MANAGED)\UnityEngine.AudioModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>$(UNITY_MANAGED)\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>$(UNITY_MANAGED)\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(UNITY_MANAGED)\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>$(UNITY_MANAGED)\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>$(VALHEIM_MANAGED)\Unity.TextMeshPro.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(UNITY_MANAGED)\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="Deploy" AfterTargets="Build" Condition="'$(MOD_DEPLOYPATH)' != ''">
+    <MakeDir Directories="$(MOD_DEPLOYPATH)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(MOD_DEPLOYPATH)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(MOD_DEPLOYPATH)" SkipUnchangedFiles="true" Condition="Exists('$(TargetDir)$(TargetName).pdb')" />
+  </Target>
+
+</Project>

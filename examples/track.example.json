@@ -1,0 +1,25 @@
+{
+  "track": {
+    "StartGate": {
+      "PointA": { "X": 0, "Y": 0, "Z": 0 },
+      "PointB": { "X": 6, "Y": 0, "Z": 0 },
+      "Forward": { "X": 0, "Y": 0, "Z": 1 }
+    },
+    "FinishGate": {
+      "PointA": { "X": 1000, "Y": 50, "Z": 2000 },
+      "PointB": { "X": 1006, "Y": 50, "Z": 2000 },
+      "Forward": { "X": 0, "Y": 0, "Z": 1 }
+    },
+    "Checkpoints": [
+      {
+        "Index": 1,
+        "Gate": {
+          "PointA": { "X": 100, "Y": 10, "Z": 200 },
+          "PointB": { "X": 106, "Y": 10, "Z": 200 },
+          "Forward": { "X": 0, "Y": 0, "Z": 1 }
+        }
+      }
+    ]
+  },
+  "notes": "Replace coordinates after registering gates in-game with /run register commands."
+}
