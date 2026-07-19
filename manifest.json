@@ -1,6 +1,6 @@
 {
   "name": "RunningMan",
-  "version_number": "1.5.9",
+  "version_number": "1.5.10",
   "website_url": "https://github.com/Abengs84/RunningMan",
   "description": "Server-authoritative Valheim marathon races with checkpoints, gear rules, HUD, and live standings.",
   "dependencies": [

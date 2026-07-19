@@ -6,6 +6,8 @@ Server-authoritative **marathon races** for Valheim: checkpoints, gear rules, li
 
 Want some great fun with your friends? Spice up Valheim with a fair race: shared gear rules, and Running skill normalized to **50** for the event only. Add your Steam ID to the server `adminlist.txt`, open the menu with **F6**, and place a start line, checkpoints, and a finish line.
 
+Custom race sounds (`start`, `countdown`, `checkpoint`, `finish`, `false_start`) ship in the `Sounds` folder next to the DLL.
+
 Source & full docs: [github.com/Abengs84/RunningMan](https://github.com/Abengs84/RunningMan)
 
 ## Quick start

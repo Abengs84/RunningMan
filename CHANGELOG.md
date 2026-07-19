@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.10
+
+- Thunderstore package includes race `Sounds/` (start, countdown, checkpoint, finish, false_start)
+
 ## 1.5.9
 
 - Finish announces place (e.g. 1st / 2nd) on MessageHud for everyone; finisher also gets a personal "You finished…" alert
