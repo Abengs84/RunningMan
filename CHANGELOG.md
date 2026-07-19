@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.9
+
+- Finish announces place (e.g. 1st / 2nd) on MessageHud for everyone; finisher also gets a personal "You finished…" alert
+- Delayed "all runners finished" so it doesn't overwrite the place message
+- Richer Thunderstore README (client mod required, race pitch)
+
 ## 1.5.8
 
 - F6: world records, status, admin check, join/leave use yellow MessageHud

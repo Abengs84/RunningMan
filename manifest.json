@@ -1,8 +1,8 @@
 {
   "name": "RunningMan",
-  "version_number": "1.5.8",
+  "version_number": "1.5.9",
   "website_url": "https://github.com/Abengs84/RunningMan",
-  "description": "Server-authoritative Valheim marathon races with checkpoints, gear rules, WR/RULES signs, F6 HUD, and live standings.",
+  "description": "Server-authoritative Valheim marathon races with checkpoints, gear rules, HUD, and live standings.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2333"
   ]

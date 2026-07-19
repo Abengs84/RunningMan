@@ -2,23 +2,26 @@
 
 A Valheim BepInEx mod that tracks marathon races on dedicated servers.
 
+> **Thunderstore page** uses a shorter [README.thunderstore.md](README.thunderstore.md) (no build/dev noise). This file is the full GitHub readme.
+
 ## Features
 
 - Start/finish line detection via registered gate coordinates
 - Sequential checkpoint pairs (Standing Iron Torches)
 - Split times, personal bests, and leaderboard
-- Server-wide race broadcasts
+- Server-wide race broadcasts + yellow MessageHud alerts
 - JSON data export
-- Optional in-game HUD with elapsed time and checkpoint progress
+- In-game HUD with elapsed time and live standings
 - Admin commands to register track layout and auto-detect torch pairs
+- WR / RULES bulletin Signs
 
 ## Installation
 
 ### Thunderstore (recommended)
 
-1. Install with [Thunderstore Mod Manager](https://www.overwolf.com/app/Thunderstore-Thunderstore_Mod_Manager) / r2modman for Valheim.
+1. Install with Thunderstore Mod Manager / r2modman for Valheim.
 2. Add **RunningMan** (team **Uthenaria**) — depends on [BepInExPack Valheim](https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim/).
-3. Enable the mod on both the **dedicated server** and **clients** (HUD, sounds, WR/RULES signs need the client DLL).
+3. Enable the mod on both the **dedicated server** and **clients**.
 
 ### Manual
 

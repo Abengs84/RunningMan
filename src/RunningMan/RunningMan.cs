@@ -17,7 +17,7 @@ namespace RunningMan
     {
         public const string PluginGuid = "com.runningman.valheim";
         public const string PluginName = "RunningMan";
-        public const string PluginVersion = "1.5.8";
+        public const string PluginVersion = "1.5.9";
 
         internal static RunningManPlugin Instance { get; private set; }
         internal static ManualLogSource Log { get; private set; }

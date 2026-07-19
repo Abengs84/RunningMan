@@ -1012,14 +1012,23 @@ namespace RunningMan
             var record = session.ToCompletedRecord(finishUtc, track.CheckpointCount);
             Leaderboard.RecordCompletedRun(record);
 
-            ValheimUtil.Announce($"{session.PlayerName} finished in {record.TotalTime}!");
-            RunningManPlugin.Log.LogInfo($"Race complete: {session.PlayerName} in {record.TotalTime}");
-            BroadcastState();
-
             var place = BuildStandings(finishUtc)
                 .Find(runner => runner.PlayerId == playerId ||
                                 string.Equals(runner.PlayerName, session.PlayerName, StringComparison.OrdinalIgnoreCase))
                 ?.Place ?? 0;
+            var placeText = TimeFormatter.FormatOrdinal(place);
+            var finishMessage = place > 0
+                ? $"{session.PlayerName} finished {placeText} in {record.TotalTime}!"
+                : $"{session.PlayerName} finished in {record.TotalTime}!";
+            ValheimUtil.Announce(finishMessage);
+            if (place > 0)
+            {
+                RaceNetSync.SendYellowHudToPlayer(session.PlayerId, $"You finished {placeText}!");
+            }
+
+            RunningManPlugin.Log.LogInfo($"Race complete: {session.PlayerName} {placeText} in {record.TotalTime}");
+            BroadcastState();
+
             if (place == 1)
             {
                 RaceNetSync.SendRaceCue(session.PlayerId, RaceNetSync.CueFinishFirst);
@@ -1048,6 +1057,7 @@ namespace RunningMan
             }
 
             RestoreRunSkillsForAllSessions();
+            var finisherCount = _activeSessions.Values.Count(s => s.Finished && !s.Disqualified);
             _phase = RaceEventPhase.Idle;
             _registrationOpen = false;
             _registered.Clear();
@@ -1055,8 +1065,19 @@ namespace RunningMan
             _previousPositions.Clear();
             _reportedPositions.Clear();
             _reportedPositionAt.Clear();
-            ValheimUtil.Announce("RunningMan: all runners finished!");
             BroadcastState();
+
+            // Delay so the finisher's place announcement isn't overwritten on MessageHud.
+            if (finisherCount > 1)
+            {
+                CancelInvoke(nameof(AnnounceAllFinishedDelayed));
+                Invoke(nameof(AnnounceAllFinishedDelayed), 5f);
+            }
+        }
+
+        private void AnnounceAllFinishedDelayed()
+        {
+            ValheimUtil.Announce("RunningMan: all runners finished!");
         }
 
         private bool TryGetSession(long playerId, string playerName, out RaceSession session)
